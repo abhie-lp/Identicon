@@ -3,6 +3,22 @@ require Integer
 defmodule Identicon do
   @moduledoc """
   Generate and save the identicon image for the given string.
+
+  ## Examples
+      iex> Identicon.main("elixir")
+      :ok
+      iex> Identicon.main("django")
+      :ok
+      iex> Identicon.main("python")
+      :ok
+      iex> Identicon.main("Linkin Park")
+      :ok
+      iex> Identicon.main("Coldplay")
+      :ok
+      iex> Identicon.main("Goku")
+      :ok
+      iex> Identicon.main("Mikasa")
+      :ok
   """
   def main(string) do
     string
@@ -91,10 +107,6 @@ defmodule Identicon do
 
   @doc """
   Convert the hash value to list and retuurn Identicon.Image
-
-  ## Examples
-      iex> Identicon.hash_to_list(Identicon.create_hash("asdf"))
-      [145, 46, 200, 3, 178, 206, 73, 228, 165, 65, 6, 141, 73, 90, 181, 112]
   """
   def hash_to_list(hash_value) do
     hex = :binary.bin_to_list(hash_value)
