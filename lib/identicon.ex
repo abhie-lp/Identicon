@@ -7,6 +7,33 @@ defmodule Identicon do
     |> create_hash
     |> hash_to_list
     |> pick_color
+    |> build_grid
+  end
+
+  @doc """
+  Create the grid for the image
+  """
+  def build_grid(%Identicon.Image{hex: hex_list} = image) do
+    grid = hex_list
+          |> Enum.chunk_every(3, 3, :discard)
+          |> Enum.map(&mirror_list/1)
+          |> List.flatten
+          |> Enum.with_index
+    %Identicon.Image{image | grid: grid}
+  end
+
+  @doc """
+  Create the mirror of the given list
+
+  ## Examples
+      iex> Identicon.mirror_list([1, 2, 3])
+      [1, 2, 3, 2, 1]
+      iex> Identicon.mirror_list([1, 2, 3, 4])
+      [1, 2, 3, 4, 3, 2, 1]
+  """
+  def mirror_list(list) do
+    {mirror_elements, _} = Enum.split(list, length(list) - 1)
+    list ++ Enum.reverse(mirror_elements)
   end
 
   @doc """
