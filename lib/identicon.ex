@@ -1,3 +1,5 @@
+require Integer
+
 defmodule Identicon do
   @moduledoc """
   Generate and save the identicon image for the given string.
@@ -8,6 +10,15 @@ defmodule Identicon do
     |> hash_to_list
     |> pick_color
     |> build_grid
+    |> filter_odd_squares
+  end
+
+  @doc """
+  Filter out the odd squares.
+  """
+  def filter_odd_squares(%Identicon.Image{grid: grid} = image) do
+    grid = Enum.filter(grid, fn {num, _} -> Integer.is_even(num) end)
+    %Identicon.Image{image | grid: grid}
   end
 
   @doc """
