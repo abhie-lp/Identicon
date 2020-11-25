@@ -9,14 +9,15 @@ defmodule Identicon do
   end
 
   @doc """
-  Convert the hash value to list
+  Convert the hash value to list and retuurn Identicon.Image
 
   ## Examples
       iex> Identicon.hash_to_list(Identicon.create_hash("asdf"))
       [145, 46, 200, 3, 178, 206, 73, 228, 165, 65, 6, 141, 73, 90, 181, 112]
   """
   def hash_to_list(hash_value) do
-    :binary.bin_to_list(hash_value)
+    hex = :binary.bin_to_list(hash_value)
+    %Identicon.Image{hex: hex}
   end
 
   @doc """
