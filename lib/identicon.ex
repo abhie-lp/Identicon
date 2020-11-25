@@ -6,6 +6,14 @@ defmodule Identicon do
     string
     |> create_hash
     |> hash_to_list
+    |> pick_color
+  end
+
+  @doc """
+  Select the first three elements from the given hash list as color
+  """
+  def pick_color(%Identicon.Image{hex: [red, green, blue | _]} = image) do
+    %Identicon.Image{image | color: {red, green, blue}}
   end
 
   @doc """
