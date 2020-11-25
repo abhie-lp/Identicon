@@ -13,6 +13,14 @@ defmodule Identicon do
     |> filter_odd_squares
     |> build_pixel_map
     |> draw_image
+    |> save_image(string)
+  end
+
+  @doc """
+  Save the image to disk with string as the filename
+  """
+  def save_image(image, filename) do
+    File.write("#{filename}.png", image)
   end
 
   @doc """
